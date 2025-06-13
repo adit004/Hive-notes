@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+<div id="signin-form" class="form-section ">
+
+    <h4 class="mb-3 text-center">Sign In</h4>
+  <form method="post">
+    {% csrf_token%}
+    <div class="mb-3">
+      <label class="form-label">username</label>
+      <input type="text" class="form-control" id="user" placeholder="username">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-success w-100">Sign In</button>
+    &nbsp;
+    {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                {{message}}
+                </div>
+    {% endfor %}
+    <p class="mt-3 text-center">Don't have an account?
+<!--      <span class="toggle-link" onclick="toggleForms()">Sign Up</span>-->
+      <a href="{% url 'reader_registor' %}" class="btn btn-primary" >Sign Up</a>
+    </p>
+  </form>
+</div>
+{% endblock %}

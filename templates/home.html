@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+<div id="form" class="form-section ">
+<a class="btn btn-success w-100"  href="{% url 'login' %}" >Sign In</a>
+  <br>
+  &nbsp;
 
-</body>
-</html>
+<a class="btn btn-success w-100" href="{% url 'reader_registor' %} ">Sign Up</a>
+</div>
+{% endblock %}
