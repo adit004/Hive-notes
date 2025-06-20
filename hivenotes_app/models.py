@@ -22,4 +22,9 @@ class Reader(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=10)
     address = models.CharField(max_length=50)
-    
+
+
+class community(models.Model):
+    reader = models.ForeignKey(Reader,on_delete=models.CASCADE)
+    manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
+

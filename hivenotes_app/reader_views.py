@@ -12,7 +12,7 @@ def reader_registor(request):
         reader_form = ReaderRegister(request.POST)
         if login_form.is_valid() and reader_form.is_valid():
             reader = login_form.save(commit=False)
-            reader.is_customer = True
+            reader.is_reader = True
             reader.save()
 
             user1 = reader_form.save(commit=False)
@@ -21,3 +21,7 @@ def reader_registor(request):
             return redirect('/')
     return render(request, "reader/registor.html", {'login_form': login_form, 'reader_form': reader_form})
 
+
+
+def reader_page(request):
+    return render(request,"reader/home.html",)

@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 
 from hivenotes_app.forms import LoginRegister, ReaderRegister
@@ -10,7 +10,7 @@ def home(request):
     return render(request,"home.html",)
 
 
-def login(request):
+def Login(request):
     if request.method == 'POST':
         username = request.POST.get('user')
         password = request.POST.get('password')
@@ -20,9 +20,14 @@ def login(request):
             if user.is_staff:
                 return redirect('/')
             elif user.is_reader:
-                return redirect('/')
+                return redirect('reader_page')
             elif user.is_manager:
                 return redirect('/')
         else:
             messages.info(request,"invalid username or password")
     return render(request,"signin.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')

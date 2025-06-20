@@ -8,11 +8,11 @@
     {% csrf_token%}
     <div class="mb-3">
       <label class="form-label">username</label>
-      <input type="text" class="form-control" id="user" placeholder="username">
+      <input type="text" class="form-control" id="user" name="user" placeholder="username">
     </div>
     <div class="mb-3">
       <label class="form-label">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Password">
+      <input type="password" class="form-control" id="password" name="password" placeholder="Password">
     </div>
     <button type="submit" class="btn btn-success w-100">Sign In</button>
     &nbsp;
