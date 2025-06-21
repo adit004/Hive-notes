@@ -18,11 +18,11 @@ def Login(request):
         if user is not None:
             login(request,user)
             if user.is_staff:
-                return redirect('/')
+                return redirect('admin_page')
             elif user.is_reader:
                 return redirect('reader_page')
             elif user.is_manager:
-                return redirect('/')
+                return redirect('manager_page')
         else:
             messages.info(request,"invalid username or password")
     return render(request,"signin.html")

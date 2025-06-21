@@ -20,3 +20,7 @@ def manager_registor(request):
             user1.save()
             return redirect('/')
     return render(request, "manager/registor.html", {'login_form': login_form, 'manager_form': manager_form})
+
+
+def manager_page(request):
+    return render(request,"manager/home.html")

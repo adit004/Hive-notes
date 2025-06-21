@@ -1,0 +1,33 @@
+{% extends 'admin/home_base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Address</th>
+      <th scope="col">Status</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for manager in managers %}
+    <tr>
+      <th scoe="row">{{ forloop.counter }}</th>
+      <td>{{ manager.name }}</td>
+      <td>{{ manager.email }}</td>
+      <td>{{ manager.phone }}</td>
+      <td>{{ manager.address }}</td>
+      <td>{{ manager.account_status }}</td>
+      <td><a href="{% url 'accept_manager' manager.id %}" class="btn btn-outline-success">Accept</a></td>
+      <td><a href="{% url 'deny_manager' manager.id %}" class="btn btn-outline-danger">Decline</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
