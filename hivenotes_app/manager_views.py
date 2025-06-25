@@ -1,6 +1,9 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render
 
-from hivenotes_app.forms import ManagerRegister, LoginRegister
+from hivenotes_app.admin_views import manager_manage
+from hivenotes_app.forms import ManagerRegister, LoginRegister, CommunityForm
+from hivenotes_app.models import Manager, Community, Members
 
 
 def manager_registor(request):
@@ -23,4 +26,50 @@ def manager_registor(request):
 
 
 def manager_page(request):
-    return render(request,"manager/home.html")
+    user_id = request.user
+    manager = Manager.objects.get( user = user_id)
+    return render(request,"manager/home.html",)
+
+
+def create_community(request):
+    user = request.user
+    manager_id = Manager.objects.get(user=user)
+    community_form =CommunityForm()
+    if request.method == 'POST':
+        community_form = CommunityForm(request.POST)
+        if community_form.is_valid():
+            group = community_form.save(commit=False)
+            group.manager = manager_id
+            group.save()
+        return redirect(community)
+    return render(request,"manager/create_community.html",{"form":community_form})
+
+
+def community(request):
+    user_id = Manager.objects.get(user = request.user)
+    try:
+        community = Community.objects.get(manager = user_id)
+        return render(request, "manager/community.html", {"community": community})
+    except Community.DoesNotExist:
+        return render(request, "manager/no_community.html")
+
+
+def members_manage(request):
+    manager = Manager.objects.get( user = request.user )
+    community_id = Community.objects.get( manager = manager)
+    members = Members.objects.filter(community = community_id)
+    return render(request,"manager/members_manage.html",{"members":members})
+
+
+def accept_member(request,id):
+    members = Members.objects.get(id = id )
+    members.account_status = 'accepted'
+    members.save()
+    return redirect('members_manage')
+
+
+def deny_member(request,id):
+    members = Members.objects.get(id = id )
+    members.account_status = 'denied'
+    members.save()
+    return redirect('members_manage')

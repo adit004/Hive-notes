@@ -23,7 +23,7 @@
       <td>{{ manager.email }}</td>
       <td>{{ manager.phone }}</td>
       <td>{{ manager.address }}</td>
-      <td>{{ manager.account_status }}</td>
+      <td>{{ manager.user.account_status }}</td>
       <td><a href="{% url 'accept_manager' manager.id %}" class="btn btn-outline-success">Accept</a></td>
       <td><a href="{% url 'deny_manager' manager.id %}" class="btn btn-outline-danger">Decline</a></td>
     </tr>

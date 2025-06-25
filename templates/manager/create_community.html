@@ -1,0 +1,12 @@
+{% extends 'manager/home_base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="card p-3" xmlns="http://www.w3.org/1999/html">
+    <form method="post" class="form-control">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button type="submit" class=" btn btn-success ">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'reader/home_base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+{% for community in communities %}
+<div class="card pt-3 px-3">
+    <h3>{{community.name}}</h3>
+    <p>{{community.description}}</p>
+    <a href="{% url 'join_request' community.id %} " >Join</a>
+</div>
+{% endfor %}
+{% endblock %}

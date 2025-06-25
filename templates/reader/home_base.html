@@ -17,9 +17,9 @@
     <!--  App Topstrip -->
     <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
-        <a class="d-flex justify-content-center " href="#">
+<!--        <a class="d-flex justify-content-center " href="#">-->
           <img src=" {% static 'assets/images/logos/logo-wrappixel.svg' %} " alt="" width="150">
-        </a>
+<!--        </a>-->
 
 
       </div>
@@ -43,19 +43,12 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
           <ul id="sidebarnav">
-            <li class="nav-small-cap">
-              <iconify-icon icon="solar:menu-dots-linear" class="nav-small-cap-icon fs-4"></iconify-icon>
-              <span class="hide-menu">Home</span>
-            </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href=" } " aria-expanded="false">
+              <a class="sidebar-link" href="{% url 'reader_page' %}  " aria-expanded="false">
                 <i class="ti ti-atom"></i>
-                <span class="hide-menu">blogs</span>
+                <span class="hide-menu">HOME</span>
               </a>
             </li>
-            <!-- ---------------------------------- -->
-            <!-- Dashboard -->
-            <!-- ---------------------------------- -->
             <li class="sidebar-item">
               <a class="sidebar-link justify-content-between"
                 href="" aria-expanded="false">
@@ -63,19 +56,19 @@
                   <span class="d-flex">
                     <i class="ti ti-aperture"></i>
                   </span>
-                  <span class="hide-menu">post a blog </span>
+                  <span class="hide-menu">write a article </span>
                 </div>
 
               </a>
             </li>
             <li class="sidebar-item">
               <a class="sidebar-link justify-content-between"
-                href=" "  aria-expanded="false">
+                href="{% url 'community_view' %} "  aria-expanded="false">
                 <div class="d-flex align-items-center gap-3">
                   <span class="d-flex">
                     <i class="ti ti-shopping-cart"></i>
                   </span>
-                  <span class="hide-menu">my Blogs</span>
+                  <span class="hide-menu">Commuinty</span>
                 </div>
 
               </a>
@@ -128,7 +121,7 @@
 
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    <a href=" " class="d-flex align-items-center gap-2 dropdown-item">
+                    <a href="{% url 'reader_profile' %} " class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-user fs-6"></i>
                       <p class="mb-0 fs-3">My Profile</p>
                     </a>

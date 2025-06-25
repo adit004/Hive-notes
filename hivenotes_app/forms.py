@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from hivenotes_app.models import LoginView, Reader, Manager
+from hivenotes_app.models import LoginView, Reader, Manager, Community
 
 
 class LoginRegister(UserCreationForm):
@@ -25,3 +25,8 @@ class ReaderRegister(forms.ModelForm):
         model = Reader
         fields = ('name', 'email', 'phone', 'address')
 
+
+class CommunityForm(forms.ModelForm):
+    class Meta:
+        model = Community
+        fields = ('name','description')

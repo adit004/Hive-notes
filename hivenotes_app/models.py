@@ -4,22 +4,24 @@ from django.db import models
 # Create your models here.
 
 class LoginView(AbstractUser):
-    is_manager = models.BooleanField(default=False)
-    is_reader = models.BooleanField(default=False)
 
-
-class Manager(models.Model):
     STATUS_CHOICES = {
         ('pending','pending'),
         ('accepted','accepted'),
         ('denied','denied'),
     }
+    is_manager = models.BooleanField(default=False)
+    is_reader = models.BooleanField(default=False)
+    account_status= models.CharField(max_length=10,choices=STATUS_CHOICES,default='pending',)
+
+
+
+class Manager(models.Model):
     user = models.ForeignKey(LoginView,on_delete=models.CASCADE)
     name = models.CharField(max_length=20)
     email = models.EmailField()
     phone = models.CharField(max_length=10)
     address = models.CharField(max_length=50)
-    account_status= models.CharField(max_length=10,choices=STATUS_CHOICES,default='pending',)
 
 
 
@@ -31,7 +33,35 @@ class Reader(models.Model):
     address = models.CharField(max_length=50)
 
 
-class community(models.Model):
-    reader = models.ForeignKey(Reader,on_delete=models.CASCADE)
+class Community(models.Model):
     manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
+    name = models.CharField(max_length = 20)
+    description = models.CharField(max_length = 100)
+
+
+class Members(models.Model):
+    STATUS_CHOICES = {
+        ('pending', 'pending'),
+        ('accepted', 'accepted'),
+        ('denied', 'denied'),
+    }
+    reader = models.ForeignKey(Reader, on_delete=models.CASCADE)
+    community = models.ForeignKey(Community,on_delete=models.CASCADE)
+    account_status= models.CharField(max_length=10,choices=STATUS_CHOICES,default='pending',)
+
+
+
+class Articles(models.Model):
+    STATUS_CHOICES = {
+        ('pending', 'pending'),
+        ('approved', 'approved'),
+        ('denied', 'denied'),
+    }
+    member = models.ForeignKey(Members,on_delete=models.CASCADE)
+    head = models.CharField(max_length=20)
+    subject = models.CharField(max_length=30)
+    content = models.CharField(max_length=2000)
+    date = models.DateField(auto_now_add=True)
+    account_status= models.CharField(max_length=10,choices=STATUS_CHOICES,default='pending',)
+
 

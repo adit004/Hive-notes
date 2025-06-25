@@ -1,0 +1,9 @@
+{% extends 'manager/home_base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+<div class="card p-5">
+    <p>No community available</p>
+    <a class="btn btn-outline-danger" href="{% url 'create_community' %} ">Create a community</a>
+</div>
+
+{% endblock %}

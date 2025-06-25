@@ -22,7 +22,12 @@ def Login(request):
             elif user.is_reader:
                 return redirect('reader_page')
             elif user.is_manager:
-                return redirect('manager_page')
+                if user.account_status == 'accepted':
+                    return redirect('manager_page')
+                elif user.account_status == 'pending':
+                    messages.info(request, "waiting to be approved")
+                else:
+                    messages.info(request, "account is banned")
         else:
             messages.info(request,"invalid username or password")
     return render(request,"signin.html")
