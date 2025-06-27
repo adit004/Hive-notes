@@ -1,0 +1,24 @@
+{% extends 'reader/home_base.html' %}
+{%load crispy_forms_tags %}
+{% block content %}
+<div class=" container bg-white  p-2 " >
+    <h2>Choose a community</h2>
+    <hr>
+    {% if not member  %}
+    <p> not a member in any communites </p>
+    {% else %}
+    {% for member_id in member %}
+        <div>
+            <a href="{% url 'article_post' member_id.id %} " class=" d-flex border">
+                <img src="{{ member_id.community.photo.url }}" alt="Profile Photo" class="rounded-circle img-fluid" style="width: 50px; height: 50px; object-fit: cover;">
+
+                <h6 class="pt-3">{{member_id.community.name}}</h6>
+            </a>
+        </div>
+    &nbsp;
+
+    {% endfor %}
+
+    {% endif %}
+</div>
+{% endblock %}

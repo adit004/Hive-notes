@@ -4,7 +4,7 @@
 <div id="signup-form" class="form-section ">
 
     <h4 class="mb-3  text-center">Sign Up</h4>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token%}
       {{ login_form|crispy }}
       {{ reader_form|crispy }}

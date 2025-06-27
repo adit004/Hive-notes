@@ -2,11 +2,10 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="card p-3" xmlns="http://www.w3.org/1999/html">
-    <form method="post" class="form-control">
+    <form method="post" class="form-control" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
         <button type="submit" class=" btn btn-success ">Submit</button>
     </form>
 </div>
-
 {% endblock %}

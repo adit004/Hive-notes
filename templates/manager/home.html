@@ -1,6 +1,55 @@
 {% extends 'manager/home_base.html' %}
 {%load crispy_forms_tags %}
 {% block content %}
+<div class="container">
+    <div class="card p-5">
+    <h1>{{ community.name }}</h1>
+        <p>{{ community.description}}</p>
+    </div>
 
-    <p>manager.</p>
+<h3>Members</h3>
+    <div class=" border p-2 d-flex">
+
+    {% for member in members %}
+        <div class="border bg-white rounded-circle text-center p-3" style="width: 100px; height: 100px;">
+              <img src="{{ member.reader.profile.url }}" alt="Profile Photo" class="rounded-circle img-fluid " style="width: 50px; height: 50px; object-fit: cover;">
+              <p class="text-center">{{ member.reader.user.username }}</p>
+          </div>
+
+        {% endfor %}
+
+    </div>
+    &nbsp;
+    <h3>Articles</h3>
+    {% for article in articles %}
+    <div class="card">
+        <a href="" class="text-black">
+          <div class="d-flex ">
+              <img src="{{ article.member.community.photo.url }}" alt="Profile Photo" class="rounded-circle img-fluid" style="width: 50px; height: 50px; object-fit: cover;">
+              <p class="pt-3">{{article.member.community.name}}</p>
+          </div>
+        </a>
+        <div>
+            <p class="px-3">Published on {{ article.date|date:"F j, Y" }}</p>
+        </div>
+        <hr class="border border-mute border-2 opacity-75">
+        <div class=" px-3 pb-2">
+            <h2 class="card-title">{{ article.head }}</h2>
+            <h6 class="card-subtitle mb-2 text-muted">Sub:{{ article.subject }}</h6>
+            <p class="card-text ">{{ article.content|truncatewords:50 }}.</a></p>
+            <a href="#" class="btn btn-outline-primary">View full article</a>
+      </div>
+        <hr class="border border-mute border-2 opacity-75">
+        <div class="px-3">
+            <p>written by : &nbsp;{{ article.member.reader.name }} </p>
+        </div>
+    </div>
+&nbsp;
+{% endfor %}
+
+
+</div>
+
+
+
 {% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from hivenotes_app.models import Manager, LoginView
+from hivenotes_app.models import Manager, LoginView, Articles
 
 
 def admin_page(request):
@@ -27,3 +27,8 @@ def deny_manager(request,id):
     manager.account_status = 'denied'
     manager.save()
     return redirect('manager_manage')
+
+
+def article_view(request):
+    articles = Articles.objects.all().order_by('-date')
+    return render(request, "admin/article_view.html", {'articles': articles})

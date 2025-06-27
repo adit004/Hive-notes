@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from hivenotes_app.models import LoginView, Reader, Manager, Community
+from hivenotes_app.models import LoginView, Reader, Manager, Community, Articles
 
 
 class LoginRegister(UserCreationForm):
@@ -17,16 +17,25 @@ class LoginRegister(UserCreationForm):
 class ManagerRegister(forms.ModelForm):
     class Meta:
         model = Manager
-        fields = ('name', 'email', 'phone', 'address')
+        fields = ('name', 'profile' , 'email', 'phone', 'address')
 
 
 class ReaderRegister(forms.ModelForm):
     class Meta:
         model = Reader
-        fields = ('name', 'email', 'phone', 'address')
+        fields = ('name', 'profile' ,'email', 'phone', 'address')
 
 
 class CommunityForm(forms.ModelForm):
     class Meta:
         model = Community
-        fields = ('name','description')
+        fields = ('name','description','photo')
+
+
+
+class ArticleForm(forms.ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={'rows': 5, 'cols': 50, 'class': 'my-textarea-class', }))
+
+    class Meta:
+        model = Articles
+        fields = ('head','subject','content','photo')

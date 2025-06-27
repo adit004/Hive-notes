@@ -1,11 +1,22 @@
 {% extends 'reader/home_base.html' %}
 {%load crispy_forms_tags %}
 {% block content %}
-{% for community in communities %}
-<div class="card pt-3 px-3">
-    <h3>{{community.name}}</h3>
-    <p>{{community.description}}</p>
-    <a href="{% url 'join_request' community.id %} " >Join</a>
+{% for message in messages %}
+<div class="alert alert-danger" role="alert">
+{{message}}
 </div>
+{% endfor %}
+<h1>Communities</h1>
+{% for community in communities %}
+<div class=" bg-white justify-content-between pt-3 px-3 d-flex">
+    <div >
+        <h3>{{community.name}}</h3>
+        <p>{{community.description}}</p>
+    </div>
+    <div>
+        <a href="{% url 'join_request' community.id %} " class="btn btn-outline-success" >JOIN</a>
+    </div>
+</div>
+
 {% endfor %}
 {% endblock %}

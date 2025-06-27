@@ -18,6 +18,7 @@ class LoginView(AbstractUser):
 
 class Manager(models.Model):
     user = models.ForeignKey(LoginView,on_delete=models.CASCADE)
+    profile = models.ImageField(upload_to='profile/')
     name = models.CharField(max_length=20)
     email = models.EmailField()
     phone = models.CharField(max_length=10)
@@ -27,6 +28,7 @@ class Manager(models.Model):
 
 class Reader(models.Model):
     user = models.OneToOneField(LoginView,on_delete=models.CASCADE)
+    profile = models.ImageField(upload_to='profile/')
     name = models.CharField(max_length=20)
     email = models.EmailField()
     phone = models.CharField(max_length=10)
@@ -35,6 +37,7 @@ class Reader(models.Model):
 
 class Community(models.Model):
     manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='communityProfile/')
     name = models.CharField(max_length = 20)
     description = models.CharField(max_length = 100)
 
@@ -58,6 +61,7 @@ class Articles(models.Model):
         ('denied', 'denied'),
     }
     member = models.ForeignKey(Members,on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to='articleImages/')
     head = models.CharField(max_length=20)
     subject = models.CharField(max_length=30)
     content = models.CharField(max_length=2000)

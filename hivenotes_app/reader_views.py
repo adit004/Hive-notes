@@ -1,7 +1,8 @@
+from django.contrib import messages
 from django.shortcuts import redirect, render
 
-from hivenotes_app.forms import LoginRegister, ReaderRegister
-from hivenotes_app.models import Members, Community, Reader
+from hivenotes_app.forms import LoginRegister, ReaderRegister, ArticleForm
+from hivenotes_app.models import Members, Community, Reader, Articles
 
 
 def reader_registor(request):
@@ -10,7 +11,7 @@ def reader_registor(request):
 
     if request.method == 'POST':
         login_form = LoginRegister(request.POST)
-        reader_form = ReaderRegister(request.POST)
+        reader_form = ReaderRegister(request.POST, request.FILES)
         if login_form.is_valid() and reader_form.is_valid():
             reader = login_form.save(commit=False)
             reader.is_reader = True
@@ -25,7 +26,8 @@ def reader_registor(request):
 
 
 def reader_page(request):
-    return render(request,"reader/home.html",)
+    articles = Articles.objects.all
+    return render(request,"reader/home.html",{'articles':articles})
 
 
 def reader_profile(request):
@@ -53,8 +55,35 @@ def community_view(request):
 def join_request(request,id):
     reader = Reader.objects.get(user = request.user)
     community = Community.objects.get(id = id)
-    member = Members()
-    member.reader = reader
-    member.community = community
-    member.save()
+    if Members.objects.filter(reader=reader,community=community).exists():
+        messages.info(request, 'request pending ')
+    else:
+        member = Members()
+        member.reader = reader
+        member.community = community
+        member.save()
     return redirect('community_view')
+
+
+def joined_communities(request):
+    reader_id = Reader.objects.get(user = request.user)
+    member = Members.objects.filter(reader = reader_id, account_status = 'accepted')
+    return render(request,"reader/joined_communities.html",{'member':member})
+
+
+def article_post(request,id):
+    member = Members.objects.get(id = id)
+    article_form = ArticleForm()
+    if request.method == 'POST':
+        article_form = ArticleForm(request.POST, request.FILES)
+        if article_form.is_valid():
+            article = article_form.save(commit=False)
+            article.member = member
+            article.save()
+            return redirect('reader_page')
+    return render(request,"reader/article_post.html",{'form':article_form})
+
+
+def article_detail(request, id):
+    article = Articles.objects.get(id=id)
+    return render(request, 'reader/article_detail.html', {'article': article})
