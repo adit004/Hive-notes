@@ -18,7 +18,8 @@
     <div class="app-topstrip bg-dark py-6 px-3 w-100 d-lg-flex align-items-center justify-content-between">
       <div class="d-flex align-items-center justify-content-center gap-5 mb-2 mb-lg-0">
         <a class="d-flex justify-content-center " href="#">
-          <img src=" {% static 'assets/images/logos/logo-wrappixel.svg' %} " alt="" width="150">
+<!--          <img src=" {% static 'assets/images/logos/logo-wrappixel.svg' %} " alt="" width="150">-->
+          <h3 class="text-white">HIVE NOTES</h3>
         </a>
 
 
@@ -65,6 +66,9 @@
                   </span>
                   <span class="hide-menu">Members</span>
                 </div>
+
+              </a>
+            </li>
 
               </a>
             </li>
@@ -116,7 +120,7 @@
 
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                   <div class="message-body">
-                    <a href=" " class="d-flex align-items-center gap-2 dropdown-item">
+                    <a href="{% url 'manager_profile' %} " class="d-flex align-items-center gap-2 dropdown-item">
                       <i class="ti ti-user fs-6"></i>
                       <p class="mb-0 fs-3">My Profile</p>
                     </a>
@@ -124,10 +128,7 @@
 <!--                      <i class="ti ti-mail fs-6"></i>-->
 <!--                      <p class="mb-0 fs-3">My Account</p>-->
 <!--                    </a>-->
-                    <a href=" {% static 'javascript:void(0)' %} " class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Page</p>
-                    </a>
+
                     <a href=" {% url 'home' %} " class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
                   </div>
                 </div>

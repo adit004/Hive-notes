@@ -64,7 +64,7 @@ class Articles(models.Model):
     photo = models.ImageField(upload_to='articleImages/')
     head = models.CharField(max_length=20)
     subject = models.CharField(max_length=30)
-    content = models.CharField(max_length=2000)
+    content = models.CharField(max_length=5000)
     date = models.DateField(auto_now_add=True)
     account_status= models.CharField(max_length=10,choices=STATUS_CHOICES,default='pending',)
 

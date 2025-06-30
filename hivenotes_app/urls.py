@@ -21,6 +21,8 @@ urlpatterns = [
     path('joined_communities',reader_views.joined_communities,name="joined_communities"),
     path('article_post/<int:id>',reader_views.article_post,name="article_post"),
     path('article_detail/<int:id>',reader_views.article_detail,name="article_detail"),
+    path('community_detail/<int:id>',reader_views.community_detail,name="community_detail"),
+    path('download_pdf/<int:id>',reader_views.download_pdf_view,name="download_pdf"),
 
     # manager
     path('manager_page',manager_views.manager_page,name="manager_page"),
@@ -29,6 +31,8 @@ urlpatterns = [
     path('members_manage',manager_views.members_manage,name="members_manage"),
     path('accept_member/<int:id>',manager_views.accept_member,name="accept_member"),
     path('deny_member/<int:id>',manager_views.deny_member,name="deny_member"),
+    path('manager_profile',manager_views.manager_profile,name="manager_profile"),
+    path('manager_update/<int:id>',manager_views.manager_update,name="manager_update"),
 
     #admin
     path('admin_page',admin_views.admin_page,name="admin_page"),
@@ -36,6 +40,7 @@ urlpatterns = [
     path('accept_manager/<int:id>',admin_views.accept_manager,name="accept_manager"),
     path('deny_manager/<int:id>',admin_views.deny_manager,name="deny_manager"),
     path('article_view',admin_views.article_view,name="article_view")
+
 ]
 
 if settings.DEBUG:

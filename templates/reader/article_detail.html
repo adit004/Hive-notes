@@ -12,7 +12,11 @@
       <hr>
         <h2 class="card-title">{{ article.head }}</h2>
       <p class="card-text">{{ article.content|linebreaks }}</p>
-      <a href="{% url 'reader_page' %}" class="btn btn-secondary mt-3">Back to Articles</a>
+        <img src="{{ article.photo.url }}" style="width: 300px; height: 300px; "><br>
+      <div class="">
+          <a href="{% url 'reader_page' %}" class="btn btn-secondary mt-3">Back to Articles</a>
+        <a href="{% url 'download_pdf' article.id%}" class="btn btn-secondary mt-3" >Download</a>
+      </div>
     </div>
   </div>
 </div>

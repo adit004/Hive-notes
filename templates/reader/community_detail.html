@@ -1,26 +1,23 @@
-{% extends 'manager/home_base.html' %}
+{% extends 'reader/home_base.html' %}
 {%load crispy_forms_tags %}
 {% block content %}
 <div class="container">
     <h3>Community</h3>
     <div class="card p-5">
+        <img src="{{ community.photo.url }}" alt="Profile Photo" class="rounded-circle img-fluid" style="width: 100px; height: 100px; object-fit: cover;">
     <h1>{{ community.name }}</h1>
         <p>{{ community.description}}</p>
+        {% if member is None %}
+        <a href="{% url 'join_request' community.id %}" class="btn btn-primary">JOIN</a>
+        {% elif member.account_status == "pending" %}
+        <p> Request sent </p>
+        {% elif member.account_status == "denied" %}
+        <p class="text-danger"> Request declined </p>
+        {% else %}
+        <p> you are a member </p>
+        {% endif %}
     </div>
 
-<h3>Members</h3>
-    <div class=" border p-2 d-flex">
-
-    {% for member in members %}
-        <div class="border bg-white rounded-circle text-center p-3" style="width: 100px; height: 100px;">
-              <img src="{{ member.reader.profile.url }}" alt="Profile Photo" class="rounded-circle img-fluid " style="width: 50px; height: 50px; object-fit: cover;">
-              <p class="text-center">{{ member.reader.user.username }}</p>
-          </div>
-        &nbsp;
-        {% endfor %}
-
-    </div>
-    &nbsp;
     <h3>Articles</h3>
     {% for article in articles %}
     <div class="card">
@@ -37,7 +34,7 @@
         <div class=" px-3 pb-2">
             <h2 class="card-title">{{ article.head }}</h2>
             <h6 class="card-subtitle mb-2 text-muted">Sub:{{ article.subject }}</h6>
-            <p class="card-text ">{{ article.content}}.</a></p>
+            <p class="card-text ">{{ article.content }}.</p>
 <!--            <a href="#" class="btn btn-outline-primary">View full article</a>-->
       </div>
         <hr class="border border-mute border-2 opacity-75">
@@ -45,7 +42,6 @@
             <p>written by : &nbsp;{{ article.member.reader.name }} </p>
         </div>
     </div>
-&nbsp;
 {% endfor %}
 
 

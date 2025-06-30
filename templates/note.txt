@@ -1,0 +1,4 @@
+community view card
+article pdf download
+community indipendent pages
+<a href="{% url 'join_request' community.id %}" class="btn btn-primary">JOIN</a>
